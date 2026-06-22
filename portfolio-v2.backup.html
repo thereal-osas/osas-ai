@@ -1,0 +1,2171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Osas Abraham — Full-Stack Developer & AI Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #1a1a1a;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-h: rgba(255, 255, 255, 0.18);
+      --text: #f0ede8;
+      --text2: #888580;
+      --text3: #555250;
+      --accent: #e8ff6b;
+      --accent2: #ff6b6b;
+      --accent3: #6bffd4;
+      --fd: 'Syne', sans-serif;
+      --fb: 'DM Sans', sans-serif
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--fb);
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px)
+    }
+
+    .nav-logo {
+      font-family: var(--fd);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: -0.02em
+    }
+
+    .nav-logo span {
+      color: var(--accent)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none
+    }
+
+    .nav-links a {
+      color: var(--text2);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      transition: color 0.2s
+    }
+
+    .nav-links a:hover {
+      color: var(--text)
+    }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: var(--bg) !important;
+      padding: 0.5rem 1.25rem !important;
+      border-radius: 100px !important;
+      font-weight: 500 !important;
+      transition: opacity 0.2s !important
+    }
+
+    .nav-cta:hover {
+      opacity: 0.85 !important
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text2);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.1s forwards
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent)
+    }
+
+    .hero-headline {
+      font-family: var(--fd);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.2s forwards
+    }
+
+    .hero-headline .ac {
+      color: var(--accent)
+    }
+
+    .hero-headline .dm {
+      color: var(--text3)
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--text2);
+      max-width: 540px;
+      line-height: 1.7;
+      margin-bottom: 3rem;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.35s forwards
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.45s forwards
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      padding: 0.875rem 2rem;
+      border-radius: 100px;
+      font-family: var(--fb);
+      font-weight: 500;
+      font-size: 0.9375rem;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-block
+    }
+
+    .btn-primary:hover {
+      opacity: 0.88;
+      transform: translateY(-1px)
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--border-h);
+      color: var(--text);
+      padding: 0.875rem 2rem;
+      border-radius: 100px;
+      font-family: var(--fb);
+      font-weight: 400;
+      font-size: 0.9375rem;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s;
+      display: inline-block
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--text2);
+      transform: translateY(-1px)
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeUp 0.6s ease 0.55s forwards
+    }
+
+    .stat-num {
+      font-family: var(--fd);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.25rem
+    }
+
+    .stat-num span {
+      color: var(--accent)
+    }
+
+    .stat-label {
+      font-size: 0.8125rem;
+      color: var(--text2)
+    }
+
+    /* MARQUEE */
+    .marquee-section {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      overflow: hidden;
+      background: var(--bg2)
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 3rem;
+      width: max-content;
+      animation: marquee 22s linear infinite
+    }
+
+    .marquee-item {
+      font-family: var(--fd);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text3);
+      white-space: nowrap
+    }
+
+    .marquee-dot {
+      color: var(--accent);
+      margin-right: -2rem
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0)
+      }
+
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 2rem
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 500
+    }
+
+    .section-title {
+      font-family: var(--fd);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1rem
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--text2);
+      font-weight: 300;
+      max-width: 500px
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3rem
+    }
+
+    .about-text p {
+      color: var(--text2);
+      font-weight: 300;
+      margin-bottom: 1.25rem;
+      font-size: 1.0625rem
+    }
+
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500
+    }
+
+    .about-skills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem
+    }
+
+    .skill-group h4 {
+      font-family: var(--fd);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem
+    }
+
+    .skill-group ul {
+      list-style: none
+    }
+
+    .skill-group ul li {
+      font-size: 0.875rem;
+      color: var(--text2);
+      padding: 0.25rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem
+    }
+
+    .skill-group ul li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0
+    }
+
+    /* PROJECTS */
+    .projects-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 1rem
+    }
+
+    /* VIDEO PROJECT CARD */
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg2);
+      transition: border-color 0.3s, transform 0.3s;
+      margin-bottom: 1.5rem
+    }
+
+    .project-card:hover {
+      border-color: var(--border-h);
+      transform: translateY(-3px)
+    }
+
+    .project-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr
+    }
+
+    .project-inner.reverse {
+      direction: rtl
+    }
+
+    .project-inner.reverse>* {
+      direction: ltr
+    }
+
+    /* VIDEO CONTAINER */
+    .project-visual {
+      position: relative;
+      min-height: 340px;
+      overflow: hidden;
+      background: var(--bg3);
+      cursor: pointer
+    }
+
+    .video-wrap {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    .video-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.4s
+    }
+
+    .video-wrap video.loaded {
+      opacity: 1
+    }
+
+    /* Placeholder shown before video plays */
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      transition: opacity 0.4s
+    }
+
+    .project-card:hover .video-placeholder {
+      opacity: 0
+    }
+
+    .project-card:hover .video-wrap video {
+      opacity: 1
+    }
+
+    .play-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text2)
+    }
+
+    .play-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-h);
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    /* Gradient overlay on video so text is always readable */
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10, 10, 10, 0.3) 0%, transparent 60%);
+      pointer-events: none
+    }
+
+    /* Live badge */
+    .live-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-h);
+      border-radius: 100px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text2);
+      z-index: 2
+    }
+
+    .live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #28c840;
+      animation: pulse 1.8s ease infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: 0.6;
+        transform: scale(0.8)
+      }
+    }
+
+    /* PROJECT INFO */
+    .project-info {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center
+    }
+
+    .project-num {
+      font-family: var(--fd);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 1rem
+    }
+
+    .project-title {
+      font-family: var(--fd);
+      font-size: 1.625rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      line-height: 1.2
+    }
+
+    .project-desc {
+      font-size: 0.9375rem;
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 1.5rem
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      border: 1px solid var(--border-h);
+      color: var(--text2);
+      letter-spacing: 0.02em
+    }
+
+    .tag.featured {
+      background: rgba(232, 255, 107, 0.08);
+      border-color: rgba(232, 255, 107, 0.25);
+      color: var(--accent)
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .project-link {
+      font-size: 0.875rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: opacity 0.2s;
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      border: 1px solid rgba(232, 255, 107, 0.25);
+      background: rgba(232, 255, 107, 0.05)
+    }
+
+    .project-link:hover {
+      opacity: 0.75
+    }
+
+    .project-link.ghost {
+      color: var(--text2);
+      border-color: var(--border-h);
+      background: transparent
+    }
+
+    .project-link.case-study {
+      color: var(--text);
+      border-color: var(--border-h);
+      background: var(--bg3)
+    }
+
+    .link-arrow {
+      display: inline-block;
+      transition: transform 0.2s
+    }
+
+    .project-link:hover .link-arrow {
+      transform: translate(2px, -2px)
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 3rem
+    }
+
+    .service-item {
+      background: var(--bg2);
+      padding: 2rem;
+      transition: background 0.2s
+    }
+
+    .service-item:hover {
+      background: var(--bg3)
+    }
+
+    .service-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(232, 255, 107, 0.08);
+      border: 1px solid rgba(232, 255, 107, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 18px
+    }
+
+    .service-title {
+      font-family: var(--fd);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem
+    }
+
+    .service-desc {
+      font-size: 0.875rem;
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.6
+    }
+
+    /* PROCESS */
+    .process-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem
+    }
+
+    .process-step {
+      position: relative
+    }
+
+    .process-step::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: -12%;
+      width: 24%;
+      height: 1px;
+      background: var(--border-h)
+    }
+
+    .process-step:last-child::after {
+      display: none
+    }
+
+    .step-num {
+      font-family: var(--fd);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--border-h);
+      line-height: 1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.04em
+    }
+
+    .step-title {
+      font-family: var(--fd);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem
+    }
+
+    .step-desc {
+      font-size: 0.8125rem;
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.6
+    }
+
+    /* CONTACT */
+    .contact-wrapper {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 2rem
+    }
+
+    .contact-glow {
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(232, 255, 107, 0.06) 0%, transparent 70%);
+      pointer-events: none
+    }
+
+    .contact-title {
+      font-family: var(--fd);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 1rem
+    }
+
+    .contact-sub {
+      color: var(--text2);
+      font-weight: 300;
+      font-size: 1.0625rem;
+      max-width: 460px;
+      margin: 0 auto 2.5rem
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border)
+    }
+
+    .social-link {
+      font-size: 0.8125rem;
+      color: var(--text2);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      transition: all 0.2s
+    }
+
+    .social-link:hover {
+      color: var(--text);
+      border-color: var(--border-h)
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    footer p {
+      font-size: 0.8125rem;
+      color: var(--text3)
+    }
+
+    footer a {
+      color: var(--text3);
+      text-decoration: none;
+      transition: color 0.2s
+    }
+
+    footer a:hover {
+      color: var(--text2)
+    }
+
+    /* ANIMATIONS */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    /* CURSOR */
+    .cursor-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%)
+    }
+
+    .cursor-ring {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(232, 255, 107, 0.4);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: left 0.12s ease, top 0.12s ease, width 0.2s, height 0.2s
+    }
+
+    /* ===================== CASE STUDY PAGE ===================== */
+    .cs-page {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--bg);
+      overflow-y: auto
+    }
+
+    .cs-page.open {
+      display: block
+    }
+
+    .cs-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(10, 10, 10, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .cs-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--text2);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--fb);
+      transition: color 0.2s
+    }
+
+    .cs-back:hover {
+      color: var(--text)
+    }
+
+    .cs-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem
+    }
+
+    .cs-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      font-weight: 500
+    }
+
+    .cs-title {
+      font-family: var(--fd);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--text);
+      margin-bottom: 1.5rem
+    }
+
+    .cs-meta {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap
+    }
+
+    .cs-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem
+    }
+
+    .cs-meta-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text3)
+    }
+
+    .cs-meta-val {
+      font-size: 0.9375rem;
+      color: var(--text);
+      font-weight: 500
+    }
+
+    /* Video preview in case study */
+    .cs-video {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 3rem;
+      background: var(--bg3);
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative
+    }
+
+    .cs-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px
+    }
+
+    .cs-video-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text2)
+    }
+
+    .cs-video-placeholder p {
+      font-size: 0.875rem
+    }
+
+    .cs-section {
+      margin-bottom: 3rem
+    }
+
+    .cs-section-label {
+      font-family: var(--fd);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem
+    }
+
+    .cs-section-label::before {
+      content: '';
+      display: block;
+      width: 3px;
+      height: 1.2em;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0
+    }
+
+    .cs-section p {
+      font-size: 1rem;
+      color: var(--text2);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 1rem
+    }
+
+    .cs-section p strong {
+      color: var(--text);
+      font-weight: 500
+    }
+
+    .cs-problem-box {
+      background: rgba(255, 107, 107, 0.05);
+      border: 1px solid rgba(255, 107, 107, 0.15);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem
+    }
+
+    .cs-problem-box p {
+      color: #ffb3b3;
+      margin: 0
+    }
+
+    .cs-decision {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 0.75rem
+    }
+
+    .cs-decision h4 {
+      font-family: var(--fd);
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem
+    }
+
+    .cs-decision p {
+      font-size: 0.875rem;
+      color: var(--text2);
+      margin: 0;
+      font-weight: 300
+    }
+
+    .cs-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.5rem
+    }
+
+    .cs-metric {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center
+    }
+
+    .cs-metric-num {
+      font-family: var(--fd);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 0.5rem
+    }
+
+    .cs-metric-label {
+      font-size: 0.8125rem;
+      color: var(--text2)
+    }
+
+    .cs-screenshots {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem
+    }
+
+    .cs-screenshot {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text3);
+      font-size: 0.8125rem
+    }
+
+    .cs-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem
+    }
+
+    .cs-tag {
+      font-size: 0.8125rem;
+      padding: 0.3rem 0.875rem;
+      border-radius: 100px;
+      border: 1px solid var(--border-h);
+      color: var(--text2)
+    }
+
+    .cs-tag.hl {
+      background: rgba(232, 255, 107, 0.08);
+      border-color: rgba(232, 255, 107, 0.25);
+      color: var(--accent)
+    }
+
+    .cs-cta {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem;
+      text-align: center;
+      margin-top: 4rem
+    }
+
+    .cs-cta h3 {
+      font-family: var(--fd);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em
+    }
+
+    .cs-cta p {
+      color: var(--text2);
+      font-weight: 300;
+      margin-bottom: 1.5rem
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:768px) {
+
+      .about-grid,
+      .project-inner {
+        grid-template-columns: 1fr
+      }
+
+      .project-inner.reverse {
+        direction: ltr
+      }
+
+      .services-grid,
+      .process-list {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .process-step::after {
+        display: none
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      .hero-stats {
+        gap: 1.5rem;
+        flex-wrap: wrap
+      }
+
+      .contact-wrapper {
+        padding: 2rem
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center
+      }
+
+      .about-skills {
+        grid-template-columns: 1fr
+      }
+
+      .cs-metrics {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .cs-screenshots {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ============ CASE STUDY PAGES ============ -->
+
+  <!-- Case Study: SaaS Dashboard -->
+  <div class="cs-page" id="cs-1">
+    <nav class="cs-nav">
+      <button class="cs-back" onclick="closeCS()">← Back to portfolio</button>
+      <span style="font-size:0.8125rem;color:var(--text3)">Case study 01</span>
+    </nav>
+    <div class="cs-content">
+      <div class="cs-eyebrow">Case study · SaaS</div>
+      <h1 class="cs-title">Multi-tenant SaaS dashboard</h1>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><span class="cs-meta-label">Timeline</span><span class="cs-meta-val">3 weeks</span>
+        </div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Role</span><span class="cs-meta-val">Solo engineer</span>
+        </div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Type</span><span class="cs-meta-val">SaaS product</span>
+        </div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Status</span><span class="cs-meta-val">Live</span></div>
+      </div>
+
+      <div class="cs-video">
+        <!-- Replace src with your actual screen recording -->
+        <video id="cs1-video" controls loop muted playsinline poster="">
+          <source src="YOUR_PROJECT_1_VIDEO.mp4" type="video/mp4">
+        </video>
+        <div class="cs-video-placeholder" id="cs1-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-opacity="0.3" stroke-width="1" />
+            <path d="M20 16l14 8-14 8V16z" fill="currentColor" fill-opacity="0.4" />
+          </svg>
+          <p>Project demo video · Replace with your screen recording</p>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-label">Overview</h2>
+        <p>A production-ready, fully white-labelable SaaS dashboard boilerplate that handles the hard parts of building
+          SaaS — authentication, multi-tenancy, billing, and real-time data — so founders can focus on their actual
+          product logic.</p>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-label">The problem</h2>
+        <div class="cs-problem-box">
+          <p>Every SaaS founder spends the first 4–8 weeks building the same infrastructure: auth, org management,
+            billing, and dashboards. That's 2 months of runway burned before writing a single line of product logic.
+            There was no production-grade, truly multi-tenant starter that didn't lock you into a specific BaaS
+            provider.</p>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-label">Technical decisions</h2>
+        <div class="cs-decision">
+          <h4>Why Supabase + Postgres RLS instead of a separate tenant DB per org</h4>
+          <p>Row-level security policies at the database level mean tenancy is enforced even if application code has a
+            bug. A compromised API layer cannot leak cross-tenant data because the database itself rejects the query.
+            This is the approach used by Linear and Vercel.</p>
+        </div>
+        <div class="cs-decision">
+          <h4>Why Redis for session + rate limiting instead of JWT-only</h4>
+          <p>JWTs cannot be revoked without a blocklist. For SaaS products where you need to invalidate sessions on
+            password change, suspicious activity, or plan downgrade — a Redis session store with short-lived JWTs as
+            access tokens is the correct pattern. Added ~40ms overhead, worth the security model.</p>
+        </div>
+        <div class="cs-decision">
+          <h4>Why Stripe Billing Portal instead of custom billing UI</h4>
+          <p>Custom billing UI is a PCI compliance surface area. Stripe's hosted portal handles all card data, reducing
+            compliance scope to SAQ A. Saved ~2 weeks of development and reduced legal exposure.</p>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-label">Challenges</h2>
+        <p>The hardest part was <strong>Stripe webhook idempotency</strong>. Stripe can deliver the same webhook
+          multiple times. Without idempotency checks, a user could be granted premium access twice or have their
+          subscription cancelled by a duplicate event. I solved this by storing processed webhook IDs in Redis with a
+          24-hour TTL and checking before processing.</p>
+        <p>The second challenge was <strong>real-time without WebSocket complexity</strong>. For dashboard metrics I
+          used Supabase Realtime (Postgres LISTEN/NOTIFY under the hood) which gave push updates to connected clients
+          without managing WebSocket infrastructure. The tradeoff is Supabase-coupling, which I documented explicitly.
+        </p>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-label">Results</h2>
+        <div class="cs-metrics">
+          <div class="cs-metric">
+            <div class="cs-metric-num">&lt;800ms</div>
+            <div class="cs-metric-label">Cold load time</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-num">100%</div>
+            <div class="cs-metric-label">Tenant data isolation</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-num">3 wks</div>
+            <div class="cs-metric-label">Built and deployed</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-section">
+        <h2 class="cs-section-label">Full stack</h2>
+        <div class="cs-stack">
+          <span class="cs-tag hl">Next.js 14 App Router</span>
+          <span class="cs-tag hl">Supabase</span>
+          <span class="cs-tag hl">Stripe</span>
+          <span class="cs-tag">Redis (Upstash)</span>
+          <span class="cs-tag">TypeScript</span>
+          <span class="cs-tag">Shadcn UI</span>
+          <span class="cs-tag">Tailwind CSS</span>
+          <span class="cs-tag">Prisma</span>
+          <span class="cs-tag">Vercel</span>
+          <span class="cs-tag">GitHub Actions CI/CD</span>
+        </div>
+      </div>
+
+      <div class="cs-cta">
+        <h3>Need something similar built?</h3>
+        <p>I'm available for SaaS development projects, retainers, and technical consulting.</p>
+        <a href="mailto:abrahamosas3@gmail.com" class="btn-primary">Get in touch</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case Study: CRM -->
+  <div class="cs-page" id="cs-2">
+    <nav class="cs-nav">
+      <button class="cs-back" onclick="closeCS()">← Back to portfolio</button>
+      <span style="font-size:0.8125rem;color:var(--text3)">Case study 02</span>
+    </nav>
+    <div class="cs-content">
+      <div class="cs-eyebrow">Case study · Internal tool</div>
+      <h1 class="cs-title">Internal CRM for agencies</h1>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><span class="cs-meta-label">Timeline</span><span class="cs-meta-val">2 weeks</span>
+        </div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Role</span><span class="cs-meta-val">Solo engineer</span>
+        </div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Type</span><span class="cs-meta-val">B2B SaaS</span></div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Status</span><span class="cs-meta-val">Live · 3
+            clients</span></div>
+      </div>
+      <div class="cs-video">
+        <video id="cs2-video" controls loop muted playsinline>
+          <source src="YOUR_PROJECT_2_VIDEO.mp4" type="video/mp4">
+        </video>
+        <div class="cs-video-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-opacity="0.3" stroke-width="1" />
+            <path d="M20 16l14 8-14 8V16z" fill="currentColor" fill-opacity="0.4" />
+          </svg>
+          <p>Project demo video</p>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h2 class="cs-section-label">The problem</h2>
+        <div class="cs-problem-box">
+          <p>Small agencies managing 20–50 clients across WhatsApp, email, and spreadsheets were losing leads, missing
+            follow-ups, and spending 3–4 hours per week on manual invoicing. Generic CRMs like HubSpot were overkill and
+            priced for enterprise teams.</p>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h2 class="cs-section-label">Technical decisions</h2>
+        <div class="cs-decision">
+          <h4>BullMQ for email automation instead of cron jobs</h4>
+          <p>Cron jobs fail silently and can't be retried. BullMQ gives per-job logging, automatic retries with
+            exponential backoff, and a dashboard to inspect the queue. When an email fails at 3am, the system retries
+            and I know why it failed by morning.</p>
+        </div>
+        <div class="cs-decision">
+          <h4>PDF generation server-side with Puppeteer</h4>
+          <p>Client-side PDF generation using html2canvas breaks on complex layouts. Server-side Puppeteer renders a
+            real Chromium page and exports pixel-perfect invoices matching the client's brand. Added to a background
+            queue so it doesn't block the API response.</p>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h2 class="cs-section-label">Results</h2>
+        <div class="cs-metrics">
+          <div class="cs-metric">
+            <div class="cs-metric-num">80%</div>
+            <div class="cs-metric-label">Reduction in manual admin</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-num">3</div>
+            <div class="cs-metric-label">Paying clients on retainer</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-num">2 wks</div>
+            <div class="cs-metric-label">From spec to launch</div>
+          </div>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h2 class="cs-section-label">Full stack</h2>
+        <div class="cs-stack">
+          <span class="cs-tag hl">Next.js</span><span class="cs-tag hl">PostgreSQL</span><span
+            class="cs-tag hl">Prisma</span>
+          <span class="cs-tag">BullMQ</span><span class="cs-tag">Redis</span><span class="cs-tag">Resend</span>
+          <span class="cs-tag">Puppeteer</span><span class="cs-tag">Shadcn UI</span><span class="cs-tag">Railway</span>
+        </div>
+      </div>
+      <div class="cs-cta">
+        <h3>Need a custom internal tool?</h3>
+        <p>I build CRMs, dashboards, and admin tools tailored to exactly how your business works.</p>
+        <a href="mailto:abrahamosas3@gmail.com" class="btn-primary">Let's talk</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Case Study: AI Document Intelligence -->
+  <div class="cs-page" id="cs-3">
+    <nav class="cs-nav">
+      <button class="cs-back" onclick="closeCS()">← Back to portfolio</button>
+      <span style="font-size:0.8125rem;color:var(--text3)">Case study 03</span>
+    </nav>
+    <div class="cs-content">
+      <div class="cs-eyebrow">Case study · AI engineering</div>
+      <h1 class="cs-title">AI document intelligence platform</h1>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><span class="cs-meta-label">Timeline</span><span class="cs-meta-val">6 weeks</span>
+        </div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Role</span><span class="cs-meta-val">Solo AI
+            engineer</span></div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Type</span><span class="cs-meta-val">Enterprise AI
+            SaaS</span></div>
+        <div class="cs-meta-item"><span class="cs-meta-label">Status</span><span class="cs-meta-val">Live beta</span>
+        </div>
+      </div>
+      <div class="cs-video">
+        <video id="cs3-video" controls loop muted playsinline>
+          <source src="YOUR_PROJECT_3_VIDEO.mp4" type="video/mp4">
+        </video>
+        <div class="cs-video-placeholder">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="23" stroke="currentColor" stroke-opacity="0.3" stroke-width="1" />
+            <path d="M20 16l14 8-14 8V16z" fill="currentColor" fill-opacity="0.4" />
+          </svg>
+          <p>AI system demo — watch the agent reason in real time</p>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h2 class="cs-section-label">Overview</h2>
+        <p>An enterprise-grade platform where organisations upload any document — contracts, reports, invoices, manuals
+          — and query them in natural language. The system retrieves semantically relevant chunks, reasons across
+          multiple documents, and produces cited answers. An agent layer allows autonomous multi-step tasks: "Compare
+          payment terms across all Q1 contracts and flag deviations from our standard."</p>
+      </div>
+      <div class="cs-section">
+        <h2 class="cs-section-label">The problem</h2>
+        <div class="cs-problem-box">
+          <p>Knowledge workers spend an average of 2.5 hours per day searching for information inside documents. Legal
+            teams reviewing 200-page contracts, finance teams reconciling reports, ops teams referencing manuals — all
+            doing manual search that AI can handle in seconds. Enterprise solutions (Glean, Guru) cost $20k+/year per
+            org. SMEs had no option.</p>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h2 class="cs-section-label">System architecture</h2>
+        <div class="cs-decision">
+          <h4>RAG pipeline — why chunking strategy matters more than the model</h4>
+          <p>Naive chunking by character count loses semantic meaning at chunk boundaries. I implemented recursive
+            hierarchical chunking with overlap, preserving paragraph structure. Combined with parent-document retrieval
+            (fetch the surrounding context of matched chunks), answer quality improved 40% over naive chunking on the
+            same model.</p>
+        </div>
+        <div class="cs-decision">
+          <h4>pgvector over Pinecone for this use case</h4>
+          <p>Pinecone is excellent for pure vector search at massive scale. But this platform also needs ACID
+            transactions, metadata filtering by org/user/document, and joins with relational data. pgvector inside
+            Postgres eliminates a separate service, reduces latency by ~60ms, and keeps the data model unified. At
+            &lt;10M vectors, Postgres is competitive on query speed.</p>
+        </div>
+        <div class="cs-decision">
+          <h4>LangGraph for the agent layer instead of LangChain AgentExecutor</h4>
+          <p>AgentExecutor is a black box. LangGraph models the agent as an explicit state machine — each node is a
+            function, edges are conditional. This means I can inspect, debug, and modify the agent's reasoning graph.
+            When the agent gets stuck in a loop, I can see exactly which node is failing and why.</p>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h2 class="cs-section-label">How it works — the full pipeline</h2>
+        <p><strong>Ingestion:</strong> Document uploaded → extracted with Unstructured.io (handles PDFs, DOCX, images
+          with OCR) → chunked with recursive splitter → embedded with text-embedding-3-large → stored in pgvector with
+          metadata (org_id, doc_id, page, chunk_index).</p>
+        <p><strong>Retrieval:</strong> User query → embedded → cosine similarity search in pgvector → top-k chunks
+          retrieved → parent documents fetched for context → reranked with Cohere Rerank → passed to LLM with citations.
+        </p>
+        <p><strong>Agent tasks:</strong> User gives a goal → LangGraph planner decides sub-tasks → tools called (vector
+          search, web search, calculator, code interpreter) → results synthesised → structured output returned with
+          reasoning trace visible to user.</p>
+      </div>
+      <div class="cs-section">
+        <h2 class="cs-section-label">Results</h2>
+        <div class="cs-metrics">
+          <div class="cs-metric">
+            <div class="cs-metric-num">~2s</div>
+            <div class="cs-metric-label">Query response time</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-num">94%</div>
+            <div class="cs-metric-label">Answer relevance (eval set)</div>
+          </div>
+          <div class="cs-metric">
+            <div class="cs-metric-num">100%</div>
+            <div class="cs-metric-label">Cited responses</div>
+          </div>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h2 class="cs-section-label">Full stack</h2>
+        <div class="cs-stack">
+          <span class="cs-tag hl">LangGraph</span><span class="cs-tag hl">LangChain</span><span
+            class="cs-tag hl">pgvector</span>
+          <span class="cs-tag hl">OpenAI / Claude API</span><span class="cs-tag">Unstructured.io</span>
+          <span class="cs-tag">Cohere Rerank</span><span class="cs-tag">Next.js</span>
+          <span class="cs-tag">FastAPI (Python)</span><span class="cs-tag">PostgreSQL</span>
+          <span class="cs-tag">Redis</span><span class="cs-tag">BullMQ</span><span class="cs-tag">Supabase
+            Auth</span><span class="cs-tag">Railway</span>
+        </div>
+      </div>
+      <div class="cs-cta">
+        <h3>Need AI built into your product?</h3>
+        <p>I design and build production-grade AI systems — RAG pipelines, agents, and multimodal applications.</p>
+        <a href="mailto:abrahamosas3@gmail.com" class="btn-primary">Let's build together</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ MAIN PORTFOLIO ============ -->
+  <div id="main-portfolio">
+    <nav>
+      <a href="#" class="nav-logo">YN<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact" class="nav-cta">Hire me</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero">
+      <div class="hero-eyebrow">Available for freelance work</div>
+      <h1 class="hero-headline">Full-stack<br><span class="ac">developer</span><br><span class="dm">& AI engineer</span>
+      </h1>
+      <p class="hero-sub">I build high-performance web applications, AI-powered automation systems, and scalable SaaS
+        products for startups and businesses worldwide.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View my work</a>
+        <a href="#contact" class="btn-ghost">Let's talk</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">3<span>+</span></div>
+          <div class="stat-label">Years building</div>
+        </div>
+        <div>
+          <div class="stat-num">20<span>+</span></div>
+          <div class="stat-label">Projects shipped</div>
+        </div>
+        <div>
+          <div class="stat-num">15<span>+</span></div>
+          <div class="stat-label">Happy clients</div>
+        </div>
+        <div>
+          <div class="stat-num">5<span>★</span></div>
+          <div class="stat-label">Average rating</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="marquee-section">
+      <div class="marquee-track">
+        <span class="marquee-item">Next.js</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">React</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Node.js</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Python</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">PostgreSQL</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">LangChain</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">LangGraph</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">pgvector</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Redis</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Supabase</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Docker</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">FastAPI</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">TypeScript</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Next.js</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">React</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Node.js</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Python</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">PostgreSQL</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">LangChain</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">LangGraph</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">pgvector</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Redis</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Supabase</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">Docker</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">FastAPI</span><span class="marquee-item marquee-dot">·</span>
+        <span class="marquee-item">TypeScript</span>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-label">About</div>
+      <h2 class="section-title">Building things that matter</h2>
+      <div class="about-grid reveal">
+        <div class="about-text">
+          <p>I'm a <strong>full-stack developer and AI engineer</strong> based in Nigeria, currently building an agency
+            that helps businesses leverage modern web technology and AI to grow faster.</p>
+          <p>I specialise in <strong>scalable SaaS products</strong>, AI document intelligence systems, autonomous
+            agents, and high-performance web applications. I think in systems before I write code.</p>
+          <p>Currently preparing for a <strong>MSc in Data Science & AI</strong> at the University of Sheffield —
+            deepening my ML and AI engineering expertise while running my agency remotely.</p>
+          <p>Available for <strong>freelance projects, retainer partnerships,</strong> and high-ticket consulting.</p>
+        </div>
+        <div class="about-skills">
+          <div class="skill-group">
+            <h4>Frontend</h4>
+            <ul>
+              <li>Next.js / React</li>
+              <li>TypeScript</li>
+              <li>Tailwind CSS</li>
+              <li>Framer Motion</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h4>Backend</h4>
+            <ul>
+              <li>Node.js / FastAPI</li>
+              <li>Python</li>
+              <li>PostgreSQL / Redis</li>
+              <li>Supabase / Prisma</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h4>AI / ML</h4>
+            <ul>
+              <li>LangChain / LangGraph</li>
+              <li>RAG pipelines</li>
+              <li>pgvector / Pinecone</li>
+              <li>Agent systems</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h4>DevOps</h4>
+            <ul>
+              <li>Docker</li>
+              <li>GitHub Actions</li>
+              <li>Railway / Vercel</li>
+              <li>CI/CD pipelines</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="projects-header reveal">
+        <div>
+          <div class="section-label">Selected work</div>
+          <h2 class="section-title">Things I've built</h2>
+        </div>
+        <a href="https://github.com/yourusername" class="btn-ghost"
+          style="font-size:0.875rem;padding:0.625rem 1.5rem">View GitHub</a>
+      </div>
+
+      <!-- PROJECT 1 -->
+      <div class="project-card reveal">
+        <div class="project-inner">
+          <div class="project-visual" id="pv1" onmouseenter="playVideo('v1')" onmouseleave="pauseVideo('v1')">
+            <div class="video-wrap">
+              <!-- Replace src with your actual Cloudinary/CDN URL -->
+              <video id="v1" loop muted playsinline preload="metadata">
+                <source src="YOUR_DASHBOARD_DEMO.mp4" type="video/mp4">
+              </video>
+            </div>
+            <!-- Fallback shown before hover — a styled screenshot or gradient -->
+            <div class="video-placeholder" id="ph1">
+              <div
+                style="width:78%;height:72%;background:var(--bg);border-radius:8px;border:1px solid var(--border-h);display:flex;flex-direction:column;gap:8px;padding:14px">
+                <div style="display:flex;gap:5px;padding-bottom:8px;border-bottom:1px solid var(--border)">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57"></div>
+                  <div style="width:8px;height:8px;border-radius:50%;background:#febc2e"></div>
+                  <div style="width:8px;height:8px;border-radius:50%;background:#28c840"></div>
+                  <div style="height:6px;flex:1;border-radius:3px;background:var(--border-h)"></div>
+                </div>
+                <div style="display:grid;grid-template-columns:60px 1fr;gap:8px;flex:1">
+                  <div
+                    style="background:var(--border);border-radius:4px;display:flex;flex-direction:column;gap:4px;padding:6px">
+                    <div style="height:5px;border-radius:3px;background:var(--accent);width:70%"></div>
+                    <div style="height:5px;border-radius:3px;background:var(--border-h)"></div>
+                    <div style="height:5px;border-radius:3px;background:var(--border-h)"></div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:6px">
+                    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px">
+                      <div
+                        style="background:rgba(232,255,107,0.08);border:1px solid rgba(232,255,107,0.15);border-radius:4px;height:28px">
+                      </div>
+                      <div
+                        style="background:rgba(107,255,212,0.08);border:1px solid rgba(107,255,212,0.15);border-radius:4px;height:28px">
+                      </div>
+                      <div
+                        style="background:rgba(255,107,107,0.08);border:1px solid rgba(255,107,107,0.15);border-radius:4px;height:28px">
+                      </div>
+                    </div>
+                    <div style="flex:1;background:var(--border);border-radius:4px;position:relative;overflow:hidden">
+                      <svg viewBox="0 0 100 40" style="width:100%;height:100%;position:absolute">
+                        <polyline points="0,35 20,20 40,28 60,8 80,18 100,5" fill="none" stroke="#e8ff6b"
+                          stroke-width="1.5" opacity="0.7" />
+                        <polyline points="0,35 20,20 40,28 60,8 80,18 100,5 100,40 0,40"
+                          fill="rgba(232,255,107,0.05)" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="play-hint">
+                <div class="play-icon"><svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                    <path d="M1 1l8 5-8 5V1z" fill="currentColor" />
+                  </svg></div>
+                Hover to preview
+              </div>
+            </div>
+            <div class="live-badge">
+              <div class="live-dot"></div>Live project
+            </div>
+            <div class="video-overlay"></div>
+          </div>
+          <div class="project-info">
+            <div class="project-num">Project 01</div>
+            <h3 class="project-title">Multi-tenant SaaS dashboard</h3>
+            <p class="project-desc">Production-ready SaaS starter with multi-tenancy via Postgres RLS, RBAC, Stripe
+              billing, Redis session management, and real-time analytics. Architected to handle 10k+ users from day one.
+            </p>
+            <div class="project-tags">
+              <span class="tag featured">Next.js 14</span>
+              <span class="tag featured">Supabase + RLS</span>
+              <span class="tag">Stripe</span>
+              <span class="tag">Redis</span>
+              <span class="tag">TypeScript</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">Live demo <span class="link-arrow">↗</span></a>
+              <a href="#" class="project-link ghost">GitHub <span class="link-arrow">↗</span></a>
+              <a href="#" class="project-link case-study" onclick="openCS('cs-1');return false">Case study →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="project-card reveal">
+        <div class="project-inner reverse">
+          <div class="project-visual" onmouseenter="playVideo('v2')" onmouseleave="pauseVideo('v2')">
+            <div class="video-wrap">
+              <video id="v2" loop muted playsinline preload="metadata">
+                <source src="YOUR_CRM_DEMO.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-placeholder">
+              <div
+                style="width:80%;height:75%;background:var(--bg);border-radius:8px;border:1px solid var(--border-h);padding:12px;display:flex;flex-direction:column;gap:6px">
+                <div style="display:flex;gap:5px;padding-bottom:8px;border-bottom:1px solid var(--border)">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#ff5f57"></div>
+                  <div style="width:8px;height:8px;border-radius:50%;background:#febc2e"></div>
+                  <div style="width:8px;height:8px;border-radius:50%;background:#28c840"></div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px;flex:1">
+                  <div
+                    style="display:flex;gap:8px;align-items:center;padding:7px 8px;background:rgba(232,255,107,0.06);border:1px solid rgba(232,255,107,0.12);border-radius:6px">
+                    <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+                    <div style="flex:1">
+                      <div
+                        style="height:5px;background:rgba(240,237,232,0.3);border-radius:3px;width:55%;margin-bottom:3px">
+                      </div>
+                      <div style="height:4px;background:var(--border-h);border-radius:3px;width:35%"></div>
+                    </div>
+                    <div
+                      style="height:14px;width:44px;border-radius:100px;background:rgba(232,255,107,0.15);border:1px solid rgba(232,255,107,0.3)">
+                    </div>
+                  </div>
+                  <div
+                    style="display:flex;gap:8px;align-items:center;padding:7px 8px;background:var(--border);border-radius:6px">
+                    <div style="width:22px;height:22px;border-radius:50%;background:var(--accent3);flex-shrink:0"></div>
+                    <div style="flex:1">
+                      <div
+                        style="height:5px;background:rgba(240,237,232,0.2);border-radius:3px;width:60%;margin-bottom:3px">
+                      </div>
+                      <div style="height:4px;background:var(--border-h);border-radius:3px;width:40%"></div>
+                    </div>
+                    <div
+                      style="height:14px;width:44px;border-radius:100px;background:rgba(107,255,212,0.1);border:1px solid rgba(107,255,212,0.3)">
+                    </div>
+                  </div>
+                  <div
+                    style="display:flex;gap:8px;align-items:center;padding:7px 8px;background:var(--border);border-radius:6px">
+                    <div style="width:22px;height:22px;border-radius:50%;background:var(--accent2);flex-shrink:0"></div>
+                    <div style="flex:1">
+                      <div
+                        style="height:5px;background:rgba(240,237,232,0.2);border-radius:3px;width:45%;margin-bottom:3px">
+                      </div>
+                      <div style="height:4px;background:var(--border-h);border-radius:3px;width:30%"></div>
+                    </div>
+                    <div
+                      style="height:14px;width:44px;border-radius:100px;background:rgba(255,107,107,0.1);border:1px solid rgba(255,107,107,0.3)">
+                    </div>
+                  </div>
+                  <div
+                    style="display:flex;gap:8px;align-items:center;padding:7px 8px;background:var(--border);border-radius:6px;opacity:0.5">
+                    <div style="width:22px;height:22px;border-radius:50%;background:var(--accent);flex-shrink:0"></div>
+                    <div style="flex:1">
+                      <div
+                        style="height:5px;background:rgba(240,237,232,0.2);border-radius:3px;width:50%;margin-bottom:3px">
+                      </div>
+                      <div style="height:4px;background:var(--border-h);border-radius:3px;width:35%"></div>
+                    </div>
+                    <div style="height:14px;width:44px;border-radius:100px;background:var(--border-h)"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="play-hint">
+                <div class="play-icon"><svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                    <path d="M1 1l8 5-8 5V1z" fill="currentColor" />
+                  </svg></div>Hover to preview
+              </div>
+            </div>
+            <div class="live-badge">
+              <div class="live-dot"></div>3 paying clients
+            </div>
+            <div class="video-overlay"></div>
+          </div>
+          <div class="project-info">
+            <div class="project-num">Project 02</div>
+            <h3 class="project-title">Internal CRM for agencies</h3>
+            <p class="project-desc">Custom CRM for small agencies managing clients, tracking pipeline, automating
+              follow-up emails via BullMQ, and generating invoices with server-side PDF rendering. Reduced manual admin
+              by 80%.</p>
+            <div class="project-tags">
+              <span class="tag featured">Next.js</span>
+              <span class="tag featured">BullMQ</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Prisma</span>
+              <span class="tag">Resend</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">Live demo <span class="link-arrow">↗</span></a>
+              <a href="#" class="project-link ghost">GitHub <span class="link-arrow">↗</span></a>
+              <a href="#" class="project-link case-study" onclick="openCS('cs-2');return false">Case study →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 — AI DOCUMENT INTELLIGENCE -->
+      <div class="project-card reveal">
+        <div class="project-inner">
+          <div class="project-visual" onmouseenter="playVideo('v3')" onmouseleave="pauseVideo('v3')">
+            <div class="video-wrap">
+              <video id="v3" loop muted playsinline preload="metadata">
+                <source src="YOUR_AI_DEMO.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="video-placeholder">
+              <!-- AI / RAG visual mockup -->
+              <div
+                style="width:78%;height:75%;background:var(--bg);border-radius:10px;border:1px solid var(--border-h);display:flex;flex-direction:column;overflow:hidden">
+                <div
+                  style="padding:10px 12px;border-bottom:1px solid var(--border);background:var(--bg2);display:flex;align-items:center;gap:8px">
+                  <div
+                    style="width:24px;height:24px;border-radius:6px;background:rgba(107,255,212,0.15);border:1px solid rgba(107,255,212,0.3);display:flex;align-items:center;justify-content:center">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <circle cx="6" cy="6" r="4" stroke="#6bffd4" stroke-width="1" />
+                      <path d="M4 6h4M6 4v4" stroke="#6bffd4" stroke-width="1" stroke-linecap="round" />
+                    </svg>
+                  </div>
+                  <div style="height:5px;flex:1;background:var(--border-h);border-radius:3px"></div>
+                  <div style="width:8px;height:8px;border-radius:50%;background:#28c840"></div>
+                </div>
+                <div style="flex:1;padding:10px;display:flex;flex-direction:column;gap:8px;overflow:hidden">
+                  <!-- User query -->
+                  <div
+                    style="align-self:flex-end;max-width:75%;padding:7px 10px;background:rgba(232,255,107,0.08);border:1px solid rgba(232,255,107,0.15);border-radius:10px 10px 2px 10px">
+                    <div style="height:4px;background:rgba(232,255,107,0.4);border-radius:3px;margin-bottom:3px"></div>
+                    <div style="height:4px;background:rgba(232,255,107,0.25);border-radius:3px;width:80%"></div>
+                  </div>
+                  <!-- Thinking indicator -->
+                  <div
+                    style="display:flex;align-items:center;gap:6px;padding:6px 10px;background:rgba(107,255,212,0.05);border:1px solid rgba(107,255,212,0.1);border-radius:8px;max-width:80%">
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <circle cx="5" cy="5" r="4" stroke="#6bffd4" stroke-width="1" opacity="0.6" />
+                      <path d="M3 5h4" stroke="#6bffd4" stroke-width="1" stroke-linecap="round" />
+                    </svg>
+                    <div style="height:4px;flex:1;background:rgba(107,255,212,0.2);border-radius:3px"></div>
+                  </div>
+                  <!-- AI response with citations -->
+                  <div
+                    style="max-width:80%;padding:8px 10px;background:var(--bg3);border:1px solid var(--border-h);border-radius:10px 10px 10px 2px">
+                    <div style="height:4px;background:rgba(240,237,232,0.2);border-radius:3px;margin-bottom:4px"></div>
+                    <div
+                      style="height:4px;background:rgba(240,237,232,0.15);border-radius:3px;width:90%;margin-bottom:4px">
+                    </div>
+                    <div
+                      style="height:4px;background:rgba(240,237,232,0.1);border-radius:3px;width:70%;margin-bottom:6px">
+                    </div>
+                    <!-- Citation chips -->
+                    <div style="display:flex;gap:4px;flex-wrap:wrap">
+                      <div
+                        style="padding:2px 7px;background:rgba(232,255,107,0.08);border:1px solid rgba(232,255,107,0.2);border-radius:100px;height:14px;width:55px">
+                      </div>
+                      <div
+                        style="padding:2px 7px;background:rgba(232,255,107,0.08);border:1px solid rgba(232,255,107,0.2);border-radius:100px;height:14px;width:45px">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Input bar -->
+                <div
+                  style="padding:8px 12px;border-top:1px solid var(--border);display:flex;gap:6px;align-items:center">
+                  <div
+                    style="flex:1;height:26px;background:var(--bg3);border-radius:100px;border:1px solid var(--border)">
+                  </div>
+                  <div
+                    style="width:26px;height:26px;border-radius:50%;background:rgba(107,255,212,0.2);border:1px solid rgba(107,255,212,0.3)">
+                  </div>
+                </div>
+              </div>
+              <div class="play-hint">
+                <div class="play-icon"><svg width="10" height="12" viewBox="0 0 10 12" fill="none">
+                    <path d="M1 1l8 5-8 5V1z" fill="currentColor" />
+                  </svg></div>Hover to preview
+              </div>
+            </div>
+            <div class="live-badge">
+              <div class="live-dot"></div>AI · RAG · Agents
+            </div>
+            <div class="video-overlay"></div>
+          </div>
+          <div class="project-info">
+            <div class="project-num">Project 03</div>
+            <h3 class="project-title">AI document intelligence platform</h3>
+            <p class="project-desc">Upload any document — contracts, reports, manuals — and query it in natural language
+              with cited answers. An agent layer executes multi-step tasks: "Compare payment terms across all Q1
+              contracts and flag deviations." Built on LangGraph + pgvector RAG architecture.</p>
+            <div class="project-tags">
+              <span class="tag featured">LangGraph</span>
+              <span class="tag featured">RAG + pgvector</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Claude API</span>
+              <span class="tag">Next.js</span>
+            </div>
+            <div class="project-links">
+              <a href="#" class="project-link">Live demo <span class="link-arrow">↗</span></a>
+              <a href="#" class="project-link ghost">GitHub <span class="link-arrow">↗</span></a>
+              <a href="#" class="project-link case-study" onclick="openCS('cs-3');return false">Case study →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="reveal">
+        <div class="section-label">What I do</div>
+        <h2 class="section-title">Services</h2>
+        <p class="section-sub">I work with startups, SMEs, and founders to build the digital infrastructure their
+          business needs to grow.</p>
+      </div>
+      <div class="services-grid reveal">
+        <div class="service-item">
+          <div class="service-icon">⚡</div>
+          <div class="service-title">SaaS development</div>
+          <p class="service-desc">Full-stack SaaS products from architecture to deployment. Multi-tenancy, auth,
+            billing, and analytics built in from day one.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">🧠</div>
+          <div class="service-title">AI systems & agents</div>
+          <p class="service-desc">RAG pipelines, autonomous agents, document intelligence, and multimodal AI.
+            Production-grade, not toy demos.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">🔧</div>
+          <div class="service-title">Web applications</div>
+          <p class="service-desc">Production-grade web apps with clean architecture, fast performance, and code that
+            scales without rewrites.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">📊</div>
+          <div class="service-title">Dashboards & CRMs</div>
+          <p class="service-desc">Custom internal tools and analytics dashboards tailored to exactly how your business
+            operates.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">🔗</div>
+          <div class="service-title">API & integrations</div>
+          <p class="service-desc">Robust APIs and third-party integrations. Stripe, WhatsApp, payment gateways, and
+            custom connectors.</p>
+        </div>
+        <div class="service-item">
+          <div class="service-icon">🚀</div>
+          <div class="service-title">Technical consulting</div>
+          <p class="service-desc">System design, architecture reviews, and AI strategy for founders who need
+            senior-level thinking.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section>
+      <div class="reveal">
+        <div class="section-label">How I work</div>
+        <h2 class="section-title">My process</h2>
+      </div>
+      <div class="process-list reveal">
+        <div class="process-step">
+          <div class="step-num">01</div>
+          <div class="step-title">Understand</div>
+          <p class="step-desc">Deep dive into your problem, users, and goals. I ask uncomfortable questions most
+            developers skip.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">02</div>
+          <div class="step-title">Architect</div>
+          <p class="step-desc">System design before code. Data models, API contracts, and failure modes mapped before
+            writing a line.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">03</div>
+          <div class="step-title">Build</div>
+          <p class="step-desc">Fast iterations with weekly updates. You always know exactly where the project stands.
+          </p>
+        </div>
+        <div class="process-step">
+          <div class="step-num">04</div>
+          <div class="step-title">Ship</div>
+          <p class="step-desc">Deployed with CI/CD, monitoring, and documentation. I don't disappear after go-live.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact-wrapper reveal">
+        <div class="contact-glow"></div>
+        <div class="section-label">Let's work together</div>
+        <h2 class="contact-title">Got a project<br>in mind?</h2>
+        <p class="contact-sub">I'm currently taking on freelance projects and retainer clients. Response time under 24
+          hours.</p>
+        <a href="mailto:abrahamosas3@gmail.com" class="btn-primary"
+          style="font-size:1rem;padding:1rem 2.5rem">abrahamosas3@gmail.com</a>
+        <div class="contact-links">
+          <a href="#" class="social-link">LinkedIn</a>
+          <a href="#" class="social-link">X / Twitter</a>
+          <a href="#" class="social-link">GitHub</a>
+          <a href="#" class="social-link">WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 Osas Abraham. All rights reserved.</p>
+      <p>Built with precision · <a href="#">View source</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // CURSOR
+    const dot = document.getElementById('cursorDot'), ring = document.getElementById('cursorRing');
+    document.addEventListener('mousemove', e => {
+      dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px';
+      ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px';
+    });
+    document.querySelectorAll('a,button').forEach(el => {
+      el.addEventListener('mouseenter', () => { ring.style.width = '48px'; ring.style.height = '48px'; ring.style.borderColor = 'rgba(232,255,107,0.7)' });
+      el.addEventListener('mouseleave', () => { ring.style.width = '32px'; ring.style.height = '32px'; ring.style.borderColor = 'rgba(232,255,107,0.4)' });
+    });
+
+    // VIDEO HOVER
+    function playVideo(id) {
+      const v = document.getElementById(id);
+      if (v) { v.play().catch(() => { }); v.classList.add('loaded') }
+    }
+    function pauseVideo(id) {
+      const v = document.getElementById(id);
+      if (v) { v.pause(); v.currentTime = 0; v.classList.remove('loaded') }
+    }
+
+    // CASE STUDY
+    function openCS(id) {
+      document.querySelectorAll('.cs-page').forEach(p => p.classList.remove('open'));
+      document.getElementById(id).classList.add('open');
+      document.getElementById(id).scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCS() {
+      document.querySelectorAll('.cs-page').forEach(p => p.classList.remove('open'));
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCS() });
+
+    // SCROLL REVEAL
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>
